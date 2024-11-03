@@ -1,0 +1,45 @@
+{% extends 'polls/base.html' %}
+
+{% block title %} {{ question.text }} {% endblock %}
+
+{% block content %}
+<div class="container mt-5 p-4 rounded shadow-lg" style="background-color: #F3BFC3;">
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        <h1 class="mb-4 text-center" style="color: #F22D44;">{{ question.text }}</h1>
+
+        <div class="row align-items-center">
+        
+            <div class="col-md-6">
+                <p style="color: #f67b8e; font-weight: bold;">
+                    <span class="h5">Описание:</span> {{ question.description }}
+                </p>
+
+                {% if error_message %}
+                    <p class="text-danger"><b>{{ error_message }}</b></p>
+                {% endif %}
+
+                {% for choice in question.choice_set.all %}
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                        <label class="form-check-label" for="choice{{ forloop.counter }}" style="color: #EC4B30;">
+                            {{ choice.text }}
+                        </label>
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary mt-3" style="background-color: #F58E41; border-color: #F58E41; border-radius: 20px;">
+                    Vote
+                </button>
+            </div>
+            <div class="col-md-6 text-center mb-4">
+                <img class="img-fluid rounded" style="width: 350px" src="{{ question.image.url }}" alt="Картинка вопроса" style="max-width: 100%; border-radius: 15px;">
+            </div>
+        </div>
+    </form>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'polls:results' question.id %}" class="btn btn-link" style="color: #F22D44; text-decoration: none;">Посмотреть результаты</a>
+    </div>
+</div>
+{% endblock %}

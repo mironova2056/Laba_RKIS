@@ -1,0 +1,20 @@
+{% extends 'polls/base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="card shadow-sm rounded border-0" style="background-color: #f3bfc3;">
+    <div class="card-body">
+      <h2 class="text-center" style="color: #f22d44;">Удаление профиля</h2>
+      <p class="text-center" style="color: #f38894;">Вы уверены?</p>
+      <form method="post" class="text-center">
+        {% csrf_token %}
+        <button type="submit" class="btn rounded-pill" 
+                style="background-color: #ec4b30; color: #ffffff; padding: 10px 20px; border: none;">
+          Да
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

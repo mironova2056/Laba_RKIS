@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Главная страница {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap');
+
+        body, html {
+            font-family: 'Old Standard TT', serif;
+            background-color: rgba(242, 45, 68, 0.18);
+
+            input{
+                border: none;
+                outline: none;
+                border-radius: 20px;
+                padding: 1px 5px;
+            }
+        }
+        
+        .header, .footer {
+            background-color: #ba2835;
+            color: #fff;
+        }
+        
+        .logo {
+            color: #fff;
+            font-weight: 700;
+            font-size: 30px;
+        }
+
+        
+        .logo:hover {
+            text-decoration: none;
+            color: #F3BFC3;
+        }
+
+        .nav a {
+            color: #fff;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        
+        .nav a:hover {
+            color: #F3BFC3;
+        }
+        
+        .main-content {
+            background-color: #F38894;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body style="min-height: 100vh;display: flex; flex-direction: column; justify-content: space-between">
+    <header class="header py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="logo" href="{% url 'polls:index' %}">Главная</a>
+            <div class="nav">
+                {% if user.is_authenticated %}
+                    <a class="link" href="{% url 'polls:profile' user.id %}">Профиль</a>
+                    <a class="link" href="{% url 'polls:logout' %}">Выход</a>
+                {% else %}
+                    <a class="link" href="{% url 'polls:register' %}">Регистрация</a>
+                    <a class="link" href="{% url 'polls:login' %}">Вход</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <div>
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer py-4 mt-5">
+        <div class="container text-center">
+            <p class="m-0">© 2024 Мой Сайт</p>
+        </div>
+    </footer>
+</body>
+</html>

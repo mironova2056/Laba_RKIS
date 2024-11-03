@@ -1,0 +1,19 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div class="container mt-5 p-4 rounded shadow-lg" style="background-color: #F3BFC3; max-width: 500px;">
+    <h2 class="text-center mb-4" style="color: #F22D44;">Изменить профиль</h2>
+
+    <form class="form-register" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            {{ form.as_p }}
+        </div>
+
+        <button class="btn btn-primary btn-block mt-3" style="background-color: #F58E41; border-color: #F58E41; border-radius: 20px;">
+            Изменить
+        </button>
+    </form>
+</div>
+{% endblock %}

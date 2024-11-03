@@ -1,0 +1,26 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div class="container mt-5 p-4 rounded shadow-lg" style="background-color: #F3BFC3;">
+    {% if latest_question_list %}
+        <h2 class="text-center" style="color: #F22D44;">Вопросы:</h2>
+
+        <ul class="list-unstyled mt-4">
+            {% for question in latest_question_list %}
+                {% if question.was_published_recently or user.is_superuser %}
+                    <li class="question-item p-3 mb-3 rounded" style="background-color: #F38894;">
+                        <a class="h3 text-danger font-weight-bold" href="{% url 'polls:detail' question.id %}" style="color: #F22D44;">
+                            {{ question.text }}
+                        </a>
+                        <p style="color: #b31600;">{{ question.short_description }}</p>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2 class="text-center" style="color: #F22D44;">
+            Вопросов нет.
+        </h2>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div class="container mt-5 p-4 rounded shadow-lg" style="background-color: #ffcccc; max-width: 500px;">
+    <h2 class="text-center mb-4" style="color: #F22D44;">Регистрация</h2>
+
+    <form  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <di>
+            {{ form.as_p }}
+        </di>
+
+        <button type="submit" class="btn btn-primary btn-block" style="background-color: #F58E41; border-color: #F58E41; border-radius: 20px;">
+            Зарегистрироваться
+        </button>
+    </form>
+</div>
+{% endblock %}
